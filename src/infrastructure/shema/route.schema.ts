@@ -1,11 +1,24 @@
-import {Schema, model} from "mongoose";
-import { RouteDomain } from "../../model/domain";
+import { model, Schema } from "mongoose";
 
-const schemaDefinition:RouteDomain = {
-
+const schemaDefinition = {
+  name: String,
+  duration: String,
+  difficult: String,
+  unit: String,
+  description: String,
+  distance: Number,
 }
 
-const routeSchema = new Schema(schemaDefinition)
+const routeSchema = new Schema(schemaDefinition);
 
-const Route = model("Route", routeSchema);
-export default  Route;
+routeSchema.set('toJSON', {
+  transform: (document: any, returnedObject: any) => {
+    returnedObject.id = returnedObject._id;
+    delete returnedObject._id;
+    delete returnedObject.__v;
+  }
+})
+
+const routeModel = model("Route", routeSchema);
+
+export default routeModel;

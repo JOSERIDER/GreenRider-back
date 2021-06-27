@@ -1,10 +1,26 @@
 import { Router } from "express";
 import { RouteService } from "../../application/service";
-import { RouteDomain } from "../../model/domain";
 
-//TODO FILTER ROUTES.
 export const routeRoute = (router: Router, routeService: RouteService) => {
   router.get("/routes", (req, res) => {
+    const difficult = req.query.difficult;
+    const duration = req.query.duration;
+
+    if (difficult || duration) {
+      if (!difficult || !duration) {
+        res.status(400).json({ code: 400, mesage: "Invalid query." });
+
+        return;
+      }
+      routeService.getRoutes({ difficult, duration }).then(response => {
+        res.status(200).json(response)
+      }).catch(error => {
+        res.status(error.code).json(error);
+      });
+
+      return;
+    }
+
     routeService.getRoutes().then(response => {
       res.status(200).json(response)
     }).catch(error => {
@@ -12,18 +28,27 @@ export const routeRoute = (router: Router, routeService: RouteService) => {
     });
   });
 
-  router.get("/route/:id", (req, res) => {
+  router.get("/routes/:id", (req, res, next) => {
     const id = req.params.id;
     routeService.getRoute(id).then(response => {
       res.status(200).json(response)
     }).catch(error => {
-      res.status(error.code).json(error);
+      if (error.code === 404) {
+        res.status(404).json({
+          code: 404,
+          message: `Route with id: ${ id } Not found in database.`
+        });
+
+        return;
+      }
+      console.error(error.kind)
+      next(error)
     });
   });
 
   //TODO Handle JWT token.
-  router.post("/route", (req, res) => {
-    const route = req.body as RouteDomain;
+  router.post("/routes", (req, res) => {
+    const route = req.body;
     routeService.postRoute(route).then(response => {
       res.status(200).json(response)
     }).catch(error => {
@@ -32,21 +57,34 @@ export const routeRoute = (router: Router, routeService: RouteService) => {
   });
 
   //TODO Handle JWT token.
-  router.put("/route", (req, res) => {
-    const route = req.body as RouteDomain;
-    routeService.putRoute(route).then(response => {
+  router.put("/routes/:id", (req, res, next) => {
+    const route = req.body;
+    const id = req.params.id;
+
+    routeService.putRoute(id, route).then(response => {
       res.status(200).json(response)
     }).catch(error => {
-      res.status(error.code).json(error);
+      if (error.code === 404) {
+        res.status(404).json({
+          code: 404,
+          message: `Route with id: ${ id } Not found in database.`
+        });
+
+        return;
+      }
+      console.error(error.kind)
+      next(error);
     });
   });
 
-  router.delete("/route/:id", (req, res) => {
+  //TODO Handle JWT token.
+  router.delete("/routes/:id", (req, res, next) => {
     const id = req.params.id;
     routeService.deleteRoute(id).then(response => {
       res.status(200).json(response)
     }).catch(error => {
-      res.status(error.code).json(error);
+      console.error(error.kind)
+      next(error)
     });
   })
 

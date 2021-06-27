@@ -3,7 +3,7 @@ version: '3.4'
 services:
   greenrider-back:
     image: greenrider-back
-    container_name: greenRider-back
+    container_name: greenrider-back
     build: .
     ports:
     - 8888:8888
@@ -12,9 +12,10 @@ services:
     volumes:
     - .:/usr/src/app
     links:
-      - mongoDB
-  mongoDB:
+      - mongodb
+  mongodb:
     image: mongo
+    container_name: greenrider-db
     ports:
     - 27017:27017
     volumes:

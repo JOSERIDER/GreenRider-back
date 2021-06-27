@@ -7,7 +7,9 @@ export interface RouteRepositoryInterface {
 
   createRoute(route: RouteDomain): Promise<RouteDomain>;
 
-  updateRoute(route: RouteDomain): Promise<RouteDomain>;
+  updateRoute(id:string, route: RouteDomain): Promise<RouteDomain>;
 
   deleteRoute(id: string): Promise<void>;
+
+  getFilterRoutes(filter: any): Promise<RouteDomain[]>;
 }

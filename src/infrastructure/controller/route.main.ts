@@ -6,14 +6,16 @@ import { RouteRepositoryImp } from "../persistence/repository/RouteRepositoryImp
 import { RouteService } from "../../application/service";
 import { Router } from "express";
 import { routeRoute } from "./route.route";
+import { MongooseInterface } from "../persistence/mongoose/Mongoose.interface";
+import routeModel from "../shema/route.schema";
+import handleErrors from "../middleware/handleErrors";
 
 export class Route {
-
   private readonly r: Router = Router();
 
-  constructor() {
+  constructor(private mongoose: MongooseInterface) {
     //Instantiate repositories
-    const routeRepository: RouteRepositoryInterface = new RouteRepositoryImp();
+    const routeRepository: RouteRepositoryInterface = new RouteRepositoryImp(routeModel, mongoose);
 
     const routeService: RouteService = new RouteService(routeRepository);
 
@@ -36,6 +38,8 @@ export class Route {
     this.r.use('*', (req, res) =>
       res.status(404).send()
     );
+
+    this.r.use(handleErrors)
   }
 
 }

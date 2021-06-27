@@ -1,0 +1,33 @@
+GET localhost:8888/api/routes
+
+###-------------------------
+GET localhost:8888/api/routes/60d89a80d2490a01e5660fc0
+
+###----------------------------
+POST localhost:8888/api/routes
+content-type: application/json
+
+{
+  "name": "Las pantallas",
+  "duration": "2h 10 min",
+  "difficult": "Super easy",
+  "unit": "KM",
+  "description": "No hay cuestas, un falso llano :>",
+  "distance": 18
+}
+
+###-------------------------------
+PUT localhost:8888/api/routes/60d89a80d2490a01e5660fc0
+content-type: application/json
+
+{
+  "name": "Las pantallas",
+  "duration": "2h 10 min",
+  "difficult": "Super easy",
+  "unit": "KM",
+  "description": "No hay cuestas, un falso llano :>",
+  "distance": 18
+}
+
+###-------------------------------
+DELETE localhost:8888/api/routes/60d89a80d2490a01e5660fc0

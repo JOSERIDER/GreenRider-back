@@ -1,6 +1,6 @@
-import { RouteRepositoryInterface, RouteDomain } from "../../../model/domain";
+import { RouteDomain, RouteRepositoryInterface } from "../../../model/domain";
 
-export class RouteService{
+export class RouteService {
 
   constructor(private routeRepository: RouteRepositoryInterface) {
   }
@@ -9,19 +9,22 @@ export class RouteService{
     return this.routeRepository.getRoute(id);
   }
 
-  getRoutes(): Promise<RouteDomain[]> {
+  getRoutes(filter?: any): Promise<RouteDomain[]> {
+    if (filter) {
+      return this.routeRepository.getFilterRoutes(filter);
+    }
     return this.routeRepository.getRoutes();
   }
 
   postRoute(route: RouteDomain): Promise<RouteDomain> {
-    return  this.routeRepository.createRoute(route);
+    return this.routeRepository.createRoute(route);
   }
 
-  putRoute(route: RouteDomain): Promise<RouteDomain> {
-    return  this.routeRepository.updateRoute(route);
+  putRoute(id: string, route: RouteDomain): Promise<RouteDomain> {
+    return this.routeRepository.updateRoute(id, route);
   }
 
   deleteRoute(id: string): Promise<void> {
-    return  this.routeRepository.deleteRoute(id);
+    return this.routeRepository.deleteRoute(id);
   }
 }

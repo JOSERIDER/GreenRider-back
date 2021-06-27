@@ -1,3 +1,4 @@
 export interface RouteDomain {
-  //TODO
+    name:string;
+    id?:string;
 }
