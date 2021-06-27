@@ -1,1 +1,1 @@
-export * from "./RouteRepositoryInterface";
+export * from "./RouteRepository.interface";

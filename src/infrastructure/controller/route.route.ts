@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { RouteService } from "../../application/service";
-import { Route } from "../../model/domain";
+import { RouteDomain } from "../../model/domain";
 
 //TODO FILTER ROUTES.
 export const routeRoute = (router: Router, routeService: RouteService) => {
@@ -23,7 +23,7 @@ export const routeRoute = (router: Router, routeService: RouteService) => {
 
   //TODO Handle JWT token.
   router.post("/route", (req, res) => {
-    const route = req.body as Route;
+    const route = req.body as RouteDomain;
     routeService.postRoute(route).then(response => {
       res.status(200).json(response)
     }).catch(error => {
@@ -33,7 +33,7 @@ export const routeRoute = (router: Router, routeService: RouteService) => {
 
   //TODO Handle JWT token.
   router.put("/route", (req, res) => {
-    const route = req.body as Route;
+    const route = req.body as RouteDomain;
     routeService.putRoute(route).then(response => {
       res.status(200).json(response)
     }).catch(error => {

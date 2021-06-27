@@ -1,23 +1,23 @@
-import { RouteRepositoryInterface, Route } from "../../../model/domain";
+import { RouteRepositoryInterface, RouteDomain } from "../../../model/domain";
 
 export class RouteService{
 
   constructor(private routeRepository: RouteRepositoryInterface) {
   }
 
-  getRoute(id: string): Promise<Route> {
+  getRoute(id: string): Promise<RouteDomain> {
     return this.routeRepository.getRoute(id);
   }
 
-  getRoutes(): Promise<Route[]> {
+  getRoutes(): Promise<RouteDomain[]> {
     return this.routeRepository.getRoutes();
   }
 
-  postRoute(route: Route): Promise<Route> {
+  postRoute(route: RouteDomain): Promise<RouteDomain> {
     return  this.routeRepository.createRoute(route);
   }
 
-  putRoute(route: Route): Promise<Route> {
+  putRoute(route: RouteDomain): Promise<RouteDomain> {
     return  this.routeRepository.updateRoute(route);
   }
 
