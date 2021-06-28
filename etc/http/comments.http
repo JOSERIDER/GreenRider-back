@@ -1,0 +1,20 @@
+GET localhost:8888/api/comments
+
+###
+GET localhost:8888/api/comments/60d975eab88a9f001f8120b5
+
+###
+
+POST localhost:8888/api/comments
+content-type: application/json
+
+{
+  "content": "I don't like this route",
+  "name": "Muy mala",
+  "title": "Lo peor",
+  "user": "5435342524353434",
+  "date": "12/12/1999"
+}
+
+###
+DELETE localhost:8888/api/comments/60d97689b68bca003bdea33c
