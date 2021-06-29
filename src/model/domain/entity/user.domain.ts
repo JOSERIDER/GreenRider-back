@@ -1,3 +1,6 @@
 export interface User {
-  //TODO
+  id:string;
+  name:string;
+  email: string;
+  passwordHash: string;
 }
