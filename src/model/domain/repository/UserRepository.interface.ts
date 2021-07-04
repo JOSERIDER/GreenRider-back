@@ -8,4 +8,8 @@ export interface UserRepositoryInterface {
   update(id: string, user: User): Promise<User>;
 
   create(user: User): Promise<User>;
+
+  findByEmail(email: string): Promise<User>;
+
+  exists(email:string): Promise<boolean>;
 }

@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/JOSERIDER/GreenRider-back#readme",
   "dependencies": {
+    "bcryptjs": "^1.0.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
@@ -36,6 +37,8 @@
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.12",
     "@types/node": "^15.12.4",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/express-session": "^1.17.0",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "eslint": "^7.29.0",

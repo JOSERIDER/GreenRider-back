@@ -1,6 +1,6 @@
 import { CommentRepositoryInterface, RouteRepositoryInterface, UserRepositoryInterface } from '../../model/domain';
 import { CommentRepositoryImp, RouteRepositoryImp, UserRepositoryImp } from '../persistence/repository';
-import { CommentService, RouteService } from '../../application/service';
+import { AuthService, CommentService, RouteService } from '../../application/service';
 import { Router } from 'express';
 import { routeRoute } from './route.route';
 import { MongooseInterface } from '../persistence/mongoose/Mongoose.interface';
@@ -10,8 +10,9 @@ import commentModel from '../shema/comment.schema';
 import { commentRoute } from './comment.route';
 import notFound from '../middleware/notFound';
 import userModel from '../shema/user.schema';
-import { UserService } from '../../application/service/user/user.service';
+import { UserService } from '../../application/service';
 import { userRoute } from './user.route';
+import { authRoute } from './auth.route';
 
 /**
  * Instantiate the repositories
@@ -29,12 +30,14 @@ export class Route {
     const routeService: RouteService = new RouteService(routeRepository);
     const commentService: CommentService = new CommentService(commentRepository);
     const userService: UserService = new UserService(userRepository);
+    const authService: AuthService = new AuthService(userRepository);
 
     //Declare routes.
     const route = Router();
     routeRoute(route, routeService);
     commentRoute(route, commentService);
     userRoute(route, userService);
+    authRoute(route, authService);
 
     this.r.use('/api', route);
     this.control();

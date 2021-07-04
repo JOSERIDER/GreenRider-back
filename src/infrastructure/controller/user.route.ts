@@ -1,46 +1,33 @@
 import { Router } from 'express';
-import { UserService } from '../../application/service/user/user.service';
-import { User } from '../../model/domain';
-import { verifyAuth } from '../middleware/auth/jwt.auth';
+import { UserService } from '../../application/service';
+import verifyAuth from '../middleware/auth/jwt.auth';
 
 export const userRoute = (router: Router, userService: UserService) => {
 
-  router.get('/user', verifyAuth, (req, res, next) => {
-    const user = req.body.user as User;
-
-    userService.get(user.id).then(response => {
-      res.status(200).json(response);
-    }).catch(error => {
-      next(error);
-    });
+  router.get('/user', verifyAuth, (req, res) => {
+    // @ts-ignore
+    const { user } = req;
+    res.status(200).json(user);
   });
 
-  router.post('/user', (req, res, next) => {
-    const id = '';//TODO obtain user user by token
-    if (!id) {
-      res.status(404).json({ code: 404, message: 'user not found' });
-      return;
-    }
-    const user = req.body as User;
-
-    userService.post(user).then(response => {
-      res.status(200).json(response);
-    }).catch(error => {
-      next(error);
-    });
-  });
-
-  router.put('/user', (req, res, next) => {
+  router.put('/user', (req, res) => {
     //TODO
-    next();
+    res.sendStatus(503);
   });
 
-  router.delete('/user', (req, res, next) => {
-    const id = '';//TODO obtain user user by token
-    if (!id) {
-      res.status(404).json({ code: 404, message: 'user not found' });
-      return;
-    }
+  router.delete('/user',verifyAuth, (req, res, next) => {
+    // @ts-ignore
+    const { id } = req.user;
+    userService.delete(id).then(() => {
+      res.sendStatus(200)
+    }).catch(error => {
+      if (error.code === 404) {
+        res.status(404).json({ code: 404, message: 'user not found' });
+        return;
+      }
+      next(error)
+    });
+
 
 
     userService.delete(id).then(response => {

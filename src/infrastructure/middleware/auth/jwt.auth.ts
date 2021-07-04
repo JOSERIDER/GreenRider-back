@@ -1,19 +1,20 @@
-const jwt = require('jsonwebtoken');
+import express from 'express';
 
-export const verifyAuth = (req: any, res: any, next: any) => {
-  const authHeader = req.headers['authorization'];
+const jwt = require('jsonwebtoken');
+const router = express.Router();
+const verifyAuth = router.use((req, res, next) => {
+  const authHeader = req.header('authorization');
   if (authHeader == null) {
-    return next({ status: 401, message: 'authorization missing' });
+    return next({ kind: 'JsonWebTokenError' });
   }
-  jwt.verify(authHeader, '', (err: any, user: any) => {
+  jwt.verify(authHeader, process.env.JWT_SECRET_KEY, (err: any, user: any) => {
     if (err) {
-      return next({ status: 403, message: err.message });
+      return next({ kind: 'TokenExpirerError' });
     }
-    req.body.user = user;
+    // @ts-ignore
+    req.user = { email: user.email, id: user.id, name: user.name };
     next();
   });
-};
+});
 
-export const authJwt = (req:any, res:any, next: any) => {
-  
-}
+export default verifyAuth;
