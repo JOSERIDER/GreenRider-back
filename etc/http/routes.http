@@ -1,14 +1,15 @@
 GET localhost:8888/api/routes
 
 ###-------------------------
-GET localhost:8888/api/routes/60d89a80d2490a01e5660fc0
+GET localhost:8888/api/routes/XXXX
 
 ###----------------------------
 POST localhost:8888/api/routes
 content-type: application/json
+Authorization: XXXXXX
 
 {
-  "name": "Las pantallas",
+  "name": "Nueva ruta",
   "duration": "2h 10 min",
   "difficult": "Super easy",
   "unit": "KM",
@@ -17,11 +18,12 @@ content-type: application/json
 }
 
 ###-------------------------------
-PUT localhost:8888/api/routes/60d89a80d2490a01e5660fc0
+PUT localhost:8888/api/routes/XXXX
 content-type: application/json
+Authorization: XXXXXX
 
 {
-  "name": "Las pantallas",
+  "name": "Hola",
   "duration": "2h 10 min",
   "difficult": "Super easy",
   "unit": "KM",
@@ -30,4 +32,5 @@ content-type: application/json
 }
 
 ###-------------------------------
-DELETE localhost:8888/api/routes/60d89a80d2490a01e5660fc0
+DELETE localhost:8888/api/routes/XXXX
+Authorization: XXXXXX

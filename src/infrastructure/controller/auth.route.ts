@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { AuthService } from '../../application/service';
 import { User } from '../../model/domain';
+import verifyAuth from '../middleware/auth/jwt.auth';
 
 export const authRoute = (router: Router, authService: AuthService) => {
   router.post('/auth/login', (req, res) => {
@@ -38,5 +39,9 @@ export const authRoute = (router: Router, authService: AuthService) => {
         res.status(401).json({ code: 401, message: 'User with this email already exists' });
       }
     });
+  });
+
+  router.get('/logout', verifyAuth, (req, res) => {
+    res.sendStatus(202);
   });
 };

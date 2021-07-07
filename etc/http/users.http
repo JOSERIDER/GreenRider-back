@@ -18,9 +18,8 @@ content-type: application/json
 
 ###---------------------------------- get user
 GET http://localhost:8888/api/user
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTFjZjcwYjY4ZjUwMDBiMzAzNzY1MiIsIm5hbWUiOiJCYWxkb21lcm8gQW5kYXRlIGxpZ2VybyIsImVtYWlsIjoiYmFsZG9AbWVyby5jb20iLCJpYXQiOjE2MjU0MTE0NDAsImV4cCI6MTYyNjAxNjI0MH0.7uNe8GGZTS3SyDQRxcCvg27eNE8FzYF_Hd4XfaSz5k8
-
+Authorization: XXXXXX
 ### ------
 
 DELETE http://localhost:8888/api/user
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTFjZjcwYjY4ZjUwMDBiMzAzNzY1MiIsIm5hbWUiOiJCYWxkb21lcm8gQW5kYXRlIGxpZ2VybyIsImVtYWlsIjoiYmFsZG9AbWVyby5jb20iLCJpYXQiOjE2MjU0MTE0NDAsImV4cCI6MTYyNjAxNjI0MH0.7uNe8GGZTS3SyDQRxcCvg27eNE8FzYF_Hd4XfaSz5k8
+Authorization: XXXXXX

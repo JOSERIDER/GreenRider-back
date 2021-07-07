@@ -97,6 +97,6 @@ export class UserRepositoryImp implements UserRepositoryInterface {
   }
 
   private static closeConnection() {
-   void mongoose.connection.close();
+   void mongoose.disconnect();
   }
 }

@@ -1,7 +1,6 @@
-import { RouteDomain, RouteRepositoryInterface } from "../../../model/domain";
-import * as mongoose from "mongoose";
-import { Model } from "mongoose";
-import { MongooseInterface } from "../mongoose/Mongoose.interface";
+import { RouteDomain, RouteRepositoryInterface } from '../../../model/domain';
+import mongoose, { Model } from 'mongoose';
+import { MongooseInterface } from '../mongoose/Mongoose.interface';
 
 export class RouteRepositoryImp implements RouteRepositoryInterface {
 
@@ -10,11 +9,14 @@ export class RouteRepositoryImp implements RouteRepositoryInterface {
 
   createRoute(route: RouteDomain): Promise<RouteDomain> {
     return new Promise((resolve, reject) => {
-      console.log(route)
+      console.log(route);
       this.routeSchema.create({ ...route }).then((response: RouteDomain) => {
         resolve(response);
-        this.mongooseInterface.closeConnection();
-      }).catch(reject);
+        RouteRepositoryImp.closeConnection();
+      }).catch(error => {
+        reject(error);
+        RouteRepositoryImp.closeConnection();
+      });
     });
   }
 
@@ -22,7 +24,7 @@ export class RouteRepositoryImp implements RouteRepositoryInterface {
     return new Promise((resolve, reject) => {
       this.routeSchema.findByIdAndRemove(id).then(() => {
         resolve();
-        RouteRepositoryImp.closeConnection()
+        RouteRepositoryImp.closeConnection();
       }).catch(error => reject(error));
     });
   }
@@ -45,7 +47,10 @@ export class RouteRepositoryImp implements RouteRepositoryInterface {
       this.routeSchema.find().then(response => {
         resolve(response);
         RouteRepositoryImp.closeConnection();
-      }).catch(reject);
+      }).catch(error => {
+        reject(error);
+        RouteRepositoryImp.closeConnection();
+      });
     });
   }
 
@@ -55,7 +60,8 @@ export class RouteRepositoryImp implements RouteRepositoryInterface {
         resolve(response);
         RouteRepositoryImp.closeConnection();
       }).catch(error => {
-        reject(error)
+        reject(error);
+        RouteRepositoryImp.closeConnection();
       });
     });
   }
@@ -70,12 +76,13 @@ export class RouteRepositoryImp implements RouteRepositoryInterface {
         resolve(response);
         RouteRepositoryImp.closeConnection();
       }).catch(error => {
-        reject(error)
+        reject(error);
+        RouteRepositoryImp.closeConnection();
       });
     });
   }
 
   private static closeConnection() {
-    void mongoose.connection.close();
+    void mongoose.disconnect();
   }
 }

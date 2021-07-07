@@ -28,8 +28,6 @@ export const userRoute = (router: Router, userService: UserService) => {
       next(error)
     });
 
-
-
     userService.delete(id).then(response => {
       res.status(200).json(response);
     }).catch(error => {
