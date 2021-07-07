@@ -6,7 +6,6 @@ import { routeRoute } from './route.route';
 import { MongooseInterface } from '../persistence/mongoose/Mongoose.interface';
 import routeModel from '../shema/route.schema';
 import handleErrors from '../middleware/handleErrors';
-import commentModel from '../shema/comment.schema';
 import { commentRoute } from './comment.route';
 import notFound from '../middleware/notFound';
 import userModel from '../shema/user.schema';
@@ -23,7 +22,7 @@ export class Route {
   constructor(private mongoose: MongooseInterface) {
     //Instantiate repositories
     const routeRepository: RouteRepositoryInterface = new RouteRepositoryImp(routeModel, mongoose);
-    const commentRepository: CommentRepositoryInterface = new CommentRepositoryImp(commentModel, mongoose);
+    const commentRepository: CommentRepositoryInterface = new CommentRepositoryImp(routeModel, mongoose);
     const userRepository: UserRepositoryInterface = new UserRepositoryImp(userModel, mongoose);
 
     //Instantiate services.

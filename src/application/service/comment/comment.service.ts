@@ -5,21 +5,12 @@ export class CommentService {
   constructor(private commentRepository: CommentRepositoryInterface) {
   }
 
-
-  getComment(id: string): Promise<Comment> {
-    return this.commentRepository.get(id);
-  }
-
-  getComments(): Promise<Comment[]> {
-    return  this.commentRepository.getComments();
-  }
-
-  post(comment: Comment): Promise<Comment> {
+  post(comment: Comment): Promise<void> {
     return this.commentRepository.insert(comment);
   }
 
-  delete(id: string): Promise<void> {
-    return this.commentRepository.delete(id);
+  delete(routeId: string, commentId: string): Promise<void> {
+    return this.commentRepository.delete(routeId, commentId);
   }
 
   put(comment: Comment) {

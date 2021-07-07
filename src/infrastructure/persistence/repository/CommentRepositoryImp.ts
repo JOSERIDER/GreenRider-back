@@ -1,15 +1,16 @@
-import { Comment, CommentRepositoryInterface } from "../../../model/domain";
-import { Model } from "mongoose";
-import { MongooseInterface } from "../mongoose/Mongoose.interface";
+import { Comment, CommentRepositoryInterface } from '../../../model/domain';
+import { Model } from 'mongoose';
+import { MongooseInterface } from '../mongoose/Mongoose.interface';
+import commentModel from '../../shema/comment.schema';
 
 export class CommentRepositoryImp implements CommentRepositoryInterface {
 
-  constructor(private commentModel: Model<any>, private connection: MongooseInterface) {
+  constructor(private model: Model<any>, private connection: MongooseInterface) {
   }
 
   get(id: string): Promise<Comment> {
     return new Promise((resolve, reject) => {
-      this.commentModel.findById(id).then(comment => {
+      this.model.findById(id).then(comment => {
         if (!comment) {
           reject({ code: 404 });
 
@@ -18,37 +19,43 @@ export class CommentRepositoryImp implements CommentRepositoryInterface {
 
         resolve(comment);
       }).catch(error => reject(error));
-    })
+    });
   }
 
   getComments(): Promise<Comment[]> {
     return new Promise((resolve, reject) => {
-      this.commentModel.find().then(comment => {
+      this.model.find().then(comment => {
         resolve(comment);
       }).catch(error => reject(error));
-    })
+    });
   }
 
   getUserComments(userId: string): Promise<Comment[]> {
     return new Promise((resolve, reject) => {
-      this.commentModel.find({ user: userId }).then(comment => {
+      this.model.find({ user: userId }).then(comment => {
         resolve(comment);
       }).catch(error => reject(error));
-    })
+    });
   }
 
-  delete(id: string): Promise<void> {
+  //TODO Remove comment.
+  delete(routeId: string, commentId: string): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.commentModel.findByIdAndRemove(id).then(() => resolve())
-        .catch(error => reject(error));
-    })
-  }
-
-  insert(comment: Comment): Promise<Comment> {
-    return new Promise((resolve, reject) => {
-      this.commentModel.create(comment).then(comment => {
-        resolve(comment);
+      this.model.updateOne({ _id: routeId }, { $unset: { comments: { _id: commentId } } }).then(() => {
+        resolve();
       }).catch(error => reject(error));
-    })
+    });
+  }
+
+  insert(comment: Comment): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.model.updateOne(
+        { _id: comment.routeId },
+        { $push: { comments: new commentModel(comment) } },
+        { returnOriginal: false })
+        .then(() => {
+          resolve();
+        }).catch(error => reject(error));
+    });
   }
 }

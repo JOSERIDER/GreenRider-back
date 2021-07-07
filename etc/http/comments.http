@@ -7,16 +7,17 @@ GET localhost:8888/api/comments/XXXX
 
 POST localhost:8888/api/comments
 content-type: application/json
-Authorization: XXXXXX
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTFkYTc3NjJlYmE4MDAxYWJkNDkwYiIsIm5hbWUiOiJCYWxkb21lcm8gQW5kYXRlIGxpZ2VybyIsImVtYWlsIjoiYmFsZG9AbWVyby5jb20iLCJpYXQiOjE2MjU2Njk2MzQsImV4cCI6MTYyNjI3NDQzNH0.pNtAMT6N1wwLvVx-GQ7n4KBWGYjipM7LJJiA2tMFhMA
 
 {
-  "content": "I don't like this route",
+  "content": "Una puta mierda",
   "name": "Muy mala",
   "title": "Lo peor",
   "user": "5435342524353434",
-  "date": "12/12/1999"
+  "date": "12/12/1999",
+  "routeId": "60e5c09e8633be0030d82e91"
 }
 
 ###
-DELETE localhost:8888/api/comments/60d97689b68bca003bdea33c
-Authorization: XXXXXX
+DELETE localhost:8888/api/comments/60e5c09e8633be0030d82e91/60e5ced38236bb008481e8d3
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTFkYTc3NjJlYmE4MDAxYWJkNDkwYiIsIm5hbWUiOiJCYWxkb21lcm8gQW5kYXRlIGxpZ2VybyIsImVtYWlsIjoiYmFsZG9AbWVyby5jb20iLCJpYXQiOjE2MjU2Njk2MzQsImV4cCI6MTYyNjI3NDQzNH0.pNtAMT6N1wwLvVx-GQ7n4KBWGYjipM7LJJiA2tMFhMA

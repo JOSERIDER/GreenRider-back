@@ -1,5 +1,5 @@
 import { RouteDomain, RouteRepositoryInterface } from '../../../model/domain';
-import mongoose, { Model } from 'mongoose';
+import { Model } from 'mongoose';
 import { MongooseInterface } from '../mongoose/Mongoose.interface';
 
 export class RouteRepositoryImp implements RouteRepositoryInterface {
@@ -83,6 +83,6 @@ export class RouteRepositoryImp implements RouteRepositoryInterface {
   }
 
   private static closeConnection() {
-    void mongoose.disconnect();
+   // void mongoose.disconnect();
   }
 }

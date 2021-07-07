@@ -1,12 +1,12 @@
 GET localhost:8888/api/routes
 
 ###-------------------------
-GET localhost:8888/api/routes/XXXX
+GET localhost:8888/api/routes/60e5c09e8633be0030d82e91
 
 ###----------------------------
 POST localhost:8888/api/routes
 content-type: application/json
-Authorization: XXXXXX
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwZTFkYTc3NjJlYmE4MDAxYWJkNDkwYiIsIm5hbWUiOiJCYWxkb21lcm8gQW5kYXRlIGxpZ2VybyIsImVtYWlsIjoiYmFsZG9AbWVyby5jb20iLCJpYXQiOjE2MjU2Njk2MzQsImV4cCI6MTYyNjI3NDQzNH0.pNtAMT6N1wwLvVx-GQ7n4KBWGYjipM7LJJiA2tMFhMA
 
 {
   "name": "Nueva ruta",

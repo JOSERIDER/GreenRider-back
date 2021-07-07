@@ -1,8 +1,7 @@
 import { model, Model, Schema } from "mongoose";
 import { Comment } from "../../model/domain";
 
-const commentSchema = new Schema<Comment, Model<Comment>, Comment>({
-  id: { type: String, required: false },
+export const commentSchema = new Schema<Comment, Model<Comment>, Comment>({
   name: { type: String, required: true },
   user: { type: String, required: true },
   title: { type: String, required: true },

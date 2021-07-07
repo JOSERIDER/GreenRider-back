@@ -5,4 +5,5 @@ export interface Comment {
   title: string;
   content: string;
   date: string;
+  routeId:string;
 }

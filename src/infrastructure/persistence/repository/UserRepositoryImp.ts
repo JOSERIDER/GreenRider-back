@@ -1,7 +1,6 @@
 import { User, UserRepositoryInterface } from '../../../model/domain';
 import { Model } from 'mongoose';
 import { MongooseInterface } from '../mongoose/Mongoose.interface';
-import * as mongoose from 'mongoose';
 
 export class UserRepositoryImp implements UserRepositoryInterface {
 
@@ -97,6 +96,6 @@ export class UserRepositoryImp implements UserRepositoryInterface {
   }
 
   private static closeConnection() {
-   void mongoose.disconnect();
+   //void mongoose.disconnect();
   }
 }

@@ -7,7 +7,7 @@ export interface CommentRepositoryInterface {
 
   getUserComments(userId: string): Promise<Comment[]>;
 
-  insert(comment: Comment): Promise<Comment>;
+  insert(comment: Comment): Promise<void>;
 
-  delete(id: string): Promise<void>;
+  delete(id: string, routeId: string): Promise<void>;
 }
