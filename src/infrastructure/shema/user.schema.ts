@@ -2,7 +2,6 @@ import { model, Model, Schema } from 'mongoose';
 import { User } from '../../model/domain';
 
 const userSchema = new Schema<User, Model<User>, User>({
-  id: {type: String, required: false},
   email: {type: String, required: true},
   passwordHash: {type: String, required: true},
   name: {type: String, required: true}

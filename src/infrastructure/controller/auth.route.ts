@@ -23,16 +23,17 @@ export const authRoute = (router: Router, authService: AuthService) => {
 
 
   router.post('/auth/register', (req, res) => {
-    const { body } = req;
-    if (!body.email || !body.password || !body.name) {
+    const user  = req.body;
+
+    if (!user.email || !user.password || !user.name) {
       res.status(401).send({ code: 403, message: 'Invalid params.' });
       return;
     }
-    const user = {
-      passwordHash: body.password,
-      ...body,
+    const newUser = {
+      passwordHash: user.password,
+      ...user,
     } as User;
-    authService.register(user).then(token => {
+    authService.register(newUser).then(token => {
       res.status(201).json({ token });
     }).catch(error => {
       if (error.code === 401) {
@@ -41,7 +42,7 @@ export const authRoute = (router: Router, authService: AuthService) => {
     });
   });
 
-  router.get('/logout', verifyAuth, (req, res) => {
+  router.get('/auth/logout', verifyAuth, (req, res) => {
     res.sendStatus(202);
   });
 };
